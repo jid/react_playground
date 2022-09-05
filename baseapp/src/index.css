@@ -44,7 +44,7 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow-y: auto;
 }
@@ -79,6 +79,7 @@ ul li::before {
 
 .item:first-child {
   margin: 0;
+  margin-top: 0.25rem;
 }
 
 .item input[type="checkbox"] {
