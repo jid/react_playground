@@ -1,13 +1,15 @@
 import React from 'react'
 
-const ColorBox = ({ color }) => {
+const ColorBox = ({ color, hexValue, isDarkText }) => {
   return (
     <div className='colorBox'
-      style={
-        { backgroundColor: !color ? '#ffffff' : color }
-      }
+      style={{
+        backgroundColor: color,
+        color: isDarkText ? "#000" : "#fff"
+      }}
     >
-      Empty value
+      <p>{color ? color : 'Empty value'}</p>
+      <p>{hexValue ? hexValue : null}</p>
     </div>
   )
 }
