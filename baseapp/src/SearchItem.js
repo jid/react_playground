@@ -8,6 +8,7 @@ const SearchItem = ({ search, setSearch }) => {
         id='search'
         type='text'
         role='searchbox'
+        autoComplete='off'
         placeholder='Search Items'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
