@@ -11,7 +11,6 @@ function App() {
   const API_URL = 'http://localhost:3500/items'
 
   const [items, setItems] = useState([])
-  // JSON.parse(localStorage.getItem('shoppingList')) || []
   const [newItem, setNewItem] = useState('')
   const [search, setSearch] = useState('')
   const [fetchError, setFetchError] = useState(null)
