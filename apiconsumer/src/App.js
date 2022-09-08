@@ -44,9 +44,8 @@ function App() {
 
       {fetchError ? <p className="error">{fetchError}</p> : null}
 
-      <DataView
-        data={data}
-      />
+      {data && data.length && <DataView data={data} />}
+
     </div>
   );
 }

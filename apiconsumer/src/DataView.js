@@ -4,14 +4,24 @@ import ListItem from './ListItem'
 const DataView = ({ data }) => {
   return (
     <div className="data-view">
-      <ol>
-        {data.map(el => (
-          <ListItem
-            key={el.id}
-            data={JSON.stringify(el)}
-          />
-        ))}
-      </ol>
+      <table className="data-view__table">
+        <thead>
+          <tr>
+            {Object.keys(data[0]).map(key => (
+              <th key={key}>{key}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(el => (
+            <tr key={el.id}>
+              {Object.keys(el).map(key => (
+                <td key={key}>{JSON.stringify(el[key])}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
