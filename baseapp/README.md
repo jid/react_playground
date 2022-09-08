@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Functionality
+
+Grocery list app. Consumes json-server package local API. Start API with run-json-server.ps1 script (Windows).
+
 ## Available Scripts
 
 In the project directory, you can run:
