@@ -15,8 +15,8 @@ const DataView = ({ data }) => {
         <tbody>
           {data.map(el => (
             <tr key={el.id}>
-              {Object.keys(el).map(key => (
-                <td key={key}>{JSON.stringify(el[key])}</td>
+              {Object.entries(el).map(([key, val]) => (
+                <td key={key}>{JSON.stringify(val)}</td>
               ))}
             </tr>
           ))}

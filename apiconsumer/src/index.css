@@ -30,11 +30,14 @@ code {
   display: flex;
   flex-direction: row;
   align-content: center;
-  gap: .25rem
+  gap: .25rem;
+  position: fixed;
+  top: 0;
+  background-color: var(--color-white);
 }
 
 button {
-  width: 32vw;
+  width: 33.33%;
   height: 2rem;
   border: none;
   box-shadow: 1px 1px 1px 1px var(--color-grey-dark);
@@ -56,9 +59,12 @@ button.active {
   color: var(--color-red);
 }
 
+.data-view {
+  margin-top: 2.25rem;
+}
+
 .data-view__table {
   width: 100%;
-  margin-top: .25rem;
   border-spacing: 1px;
   border: none;
   text-align: left;
