@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Functionality
+
+Application contains 3 buttons for consuming [{JSON} Placeholder](https://jsonplaceholder.typicode.com) fake API.
+
 ## Available Scripts
 
 In the project directory, you can run:

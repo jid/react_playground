@@ -1,3 +1,12 @@
+* {
+  --color-grey-dark: darkgrey;
+  --color-red: red;
+  --color-white: white;
+  --color-black: black;
+  --color-seagreen: seagreen;
+  --color-darkolivegreen: darkolivegreen;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -28,11 +37,21 @@ button {
   width: 32vw;
   height: 2rem;
   border: none;
-  box-shadow: 1px 1px 1px 1px darkgrey;
+  box-shadow: 1px 1px 1px 1px var(--color-grey-dark);
   border-radius: .25rem;
   cursor: pointer;
 }
 
+button.active {
+  background-color: var(--color-seagreen);
+  box-shadow: 1px 1px 1px 1px var(--color-darkolivegreen);
+  color: var(--color-white);
+}
+
 .list-item {
   text-align: left
+}
+
+.error {
+  color: var(--color-red);
 }

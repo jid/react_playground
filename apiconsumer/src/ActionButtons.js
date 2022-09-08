@@ -2,12 +2,8 @@ import React from 'react'
 import ActionButton from './ActionButton'
 
 const ActionButtons = ({
-  baseUrl,
-  setUsers,
-  setPosts,
-  setComments,
-  setFetchError,
-  setData
+  reqType,
+  setReqType
 }) => {
 
   return (
@@ -17,24 +13,18 @@ const ActionButtons = ({
     >
       <ActionButton
         title='users'
-        actionUrl={`${baseUrl}/users`}
-        setData={setUsers}
-        setDataForView={setData}
-        setFetchError={setFetchError}
+        reqType={reqType}
+        setReqType={setReqType}
       />
       <ActionButton
-        title={'posts'}
-        actionUrl={`${baseUrl}/posts`}
-        setData={setPosts}
-        setDataForView={setData}
-        setFetchError={setFetchError}
+        title='posts'
+        reqType={reqType}
+        setReqType={setReqType}
       />
       <ActionButton
-        title={'comments'}
-        actionUrl={`${baseUrl}/comments`}
-        setData={setComments}
-        setDataForView={setData}
-        setFetchError={setFetchError}
+        title='comments'
+        reqType={reqType}
+        setReqType={setReqType}
       />
     </form>
   )
