@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react'
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header title="Simple Blog App" />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
