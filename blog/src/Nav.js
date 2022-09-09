@@ -10,9 +10,10 @@ const Nav = ({ search, setSearch }) => {
         <label htmlFor="search">Search Posts</label>
         <input
           id="search"
-          tupe="text"
+          type="text"
           placeholder="Search Posts"
           value={search}
+          autoComplete="off"
           onChange={(e) => setSearch(e.target.value)}
         />
       </form>
