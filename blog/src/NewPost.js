@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const NewPost = ({
   postTitle,
@@ -34,6 +35,14 @@ const NewPost = ({
       </form>
     </main>
   )
+}
+
+NewPost.propTypes = {
+  postTitle: PropTypes.string,
+  setPostTitle: PropTypes.func,
+  postBody: PropTypes.string,
+  setPostBody: PropTypes.func,
+  handleSubmit: PropTypes.func
 }
 
 export default NewPost

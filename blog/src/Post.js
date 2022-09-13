@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const Post = ({ post }) => {
   return (
@@ -13,6 +14,10 @@ const Post = ({ post }) => {
       </p>
     </article>
   )
+}
+
+Post.propTypes = {
+  post: PropTypes.object
 }
 
 export default Post

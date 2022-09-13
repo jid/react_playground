@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const PostPage = ({ posts, handleDelete }) => {
   const { id } = useParams()
@@ -13,7 +14,10 @@ const PostPage = ({ posts, handleDelete }) => {
             <h2>{post.title}</h2>
             <p className="postData">{post.datetime}</p>
             <p className="postBody">{post.body}</p>
-            <button onClick={() => handleDelete(id)}>
+            <Link to={`/edit/${post.id}`}>
+              <button className="editButton">Edit Post</button>
+            </Link>
+            <button className="deleteButton" onClick={() => handleDelete(id)}>
               Delete Post
             </button>
           </>
@@ -29,6 +33,11 @@ const PostPage = ({ posts, handleDelete }) => {
       </article>
     </main>
   )
+}
+
+PostPage.propTypes = {
+  posts: PropTypes.array,
+  handleDelete: PropTypes.func
 }
 
 export default PostPage

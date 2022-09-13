@@ -1,5 +1,6 @@
 import React from 'react'
 import Post from './Post'
+import PropTypes from 'prop-types'
 
 const Feed = ({ posts }) => {
   return (
@@ -9,6 +10,10 @@ const Feed = ({ posts }) => {
       ))}
     </>
   )
+}
+
+Feed.propTypes = {
+  posts: PropTypes.array
 }
 
 export default Feed

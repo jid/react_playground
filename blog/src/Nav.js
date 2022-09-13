@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 const Nav = ({ search, setSearch }) => {
   return (
@@ -24,6 +25,11 @@ const Nav = ({ search, setSearch }) => {
       </ul>
     </nav>
   )
+}
+
+Nav.propTypes = {
+  search: PropTypes.string,
+  setSearch: PropTypes.func
 }
 
 export default Nav
