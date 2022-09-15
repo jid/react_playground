@@ -12,9 +12,11 @@ import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import api from './api/posts'
 import useWindowSize from './hooks/useWindowSize'
+import useAxiosFetch from './hooks/useAxiosFetch'
 
 function App() {
   const [posts, setPosts] = useState([])
+  const [postsCount, setPostsCount] = useState(0)
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState(posts)
   const [postTitle, setPostTitle] = useState('')
@@ -24,25 +26,15 @@ function App() {
   const navigate = useNavigate()
   const { width } = useWindowSize()
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await api.get('/posts')
-        setPosts(response.data)
-      } catch (err) {
-        // HTTP response code <> 2xx range
-        if (err.response) {
-          console.log(`data: ${err.response.data}; staus: ${err.response.status}; headers: ${err.response.headers}`)
-        }
-        else {
-          console.log(`Error: ${err.message}`)
-        }
+  const { data, fetchError, isLoading } = useAxiosFetch('http://localhost:3500/posts')
 
-        console.log(err.toJSON())
-      }
-    }
-    fetchPosts()
-  }, [])
+  useEffect(() => {
+    setPosts(data)
+  }, [data])
+
+  useEffect(() => {
+    setPostsCount(posts.length)
+  }, [posts])
 
   useEffect(() => {
     let postsFiltered = posts
@@ -110,12 +102,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header title="Simple Blog App" width={width} />
+      <Header title="Simple Blog App" postsCount={postsCount} width={width} />
       <Nav search={search} setSearch={setSearch} />
       <Routes>
         <Route path="/" element={
           <Home
             posts={searchResults}
+            fetchError={fetchError}
+            isLoading={isLoading}
           />
         } />
         <Route path="/post" element={
