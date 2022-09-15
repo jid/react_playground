@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
+import { useContext } from 'react'
+import DataContext from './context/DataContext'
 
-const Nav = ({ search, setSearch }) => {
+const Nav = () => {
+  const { search, setSearch } = useContext(DataContext)
   return (
     <nav className="Nav">
       <form
@@ -27,9 +30,9 @@ const Nav = ({ search, setSearch }) => {
   )
 }
 
-Nav.propTypes = {
-  search: PropTypes.string,
-  setSearch: PropTypes.func
-}
+// Nav.propTypes = {
+//   search: PropTypes.string,
+//   setSearch: PropTypes.func
+// }
 
 export default Nav

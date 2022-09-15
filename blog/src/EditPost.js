@@ -1,16 +1,17 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
+import DataContext from './context/DataContext'
+import { format } from 'date-fns'
+import api from './api/posts'
+import { useNavigate } from 'react-router-dom'
 
-const EditPost = ({
-  posts,
-  editTitle,
-  setEditTitle,
-  editBody,
-  setEditBody,
-  handleEdit
-}) => {
+const EditPost = () => {
+  const { posts, setPosts } = useContext(DataContext)
+  const [editTitle, setEditTitle] = useState('')
+  const [editBody, setEditBody] = useState('')
+  const navigate = useNavigate()
   const { id } = useParams()
   const post = posts.find(post => post.id.toString() === id)
 
@@ -20,6 +21,25 @@ const EditPost = ({
       setEditBody(post.body)
     }
   }, [post, setEditTitle, setEditBody])
+
+  const handleEdit = async (id) => {
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp')
+    const updatedPost = {
+      title: editTitle,
+      datetime,
+      body: editBody
+    }
+
+    try {
+      await api.patch(`/posts/${id}`, updatedPost)
+      setPosts(posts.map(post => post.id === id ? { ...post, ...updatedPost } : post))
+      setEditTitle('')
+      setEditBody('')
+      navigate('/')
+    } catch (err) {
+      console.log(`Error: ${err.message}`)
+    }
+  }
 
   return (
     <main className="NewPost">
@@ -63,12 +83,12 @@ const EditPost = ({
   )
 }
 
-EditPost.propTypes = {
-  editTitle: PropTypes.string,
-  setEditTitle: PropTypes.func,
-  editBody: PropTypes.string,
-  setEditBody: PropTypes.func,
-  handleEdit: PropTypes.func
-}
+// EditPost.propTypes = {
+//   editTitle: PropTypes.string,
+//   setEditTitle: PropTypes.func,
+//   editBody: PropTypes.string,
+//   setEditBody: PropTypes.func,
+//   handleEdit: PropTypes.func
+// }
 
 export default EditPost
