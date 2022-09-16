@@ -1,18 +1,18 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-import { useState, useContext } from 'react'
-import DataContext from './context/DataContext'
+import { useState } from 'react'
 import { format } from 'date-fns'
-import api from './api/posts'
 import { useNavigate } from 'react-router-dom'
+import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const NewPost = () => {
-  const { posts, setPosts } = useContext(DataContext)
+  const posts = useStoreState((state) => state.posts)
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
+  const addPost = useStoreActions((actions) => actions.addPost)
+
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     const id = posts.length ? posts[posts.length - 1].id + 1 : 1
     const datetime = format(new Date(), 'MMMM dd, yyyy pp')
@@ -22,17 +22,8 @@ const NewPost = () => {
       datetime,
       body: postBody
     }
-
-    try {
-      const response = await api.post('/posts', post)
-      const newPosts = [...posts, response.data]
-      setPosts(newPosts)
-      setPostTitle('')
-      setPostBody('')
-      navigate(`/`)
-    } catch (err) {
-      console.log(`Error: ${err.message}`)
-    }
+    addPost(post)
+    navigate(`/`)
   }
 
   return (
@@ -63,13 +54,5 @@ const NewPost = () => {
     </main>
   )
 }
-
-// NewPost.propTypes = {
-//   postTitle: PropTypes.string,
-//   setPostTitle: PropTypes.func,
-//   postBody: PropTypes.string,
-//   setPostBody: PropTypes.func,
-//   handleSubmit: PropTypes.func
-// }
 
 export default NewPost

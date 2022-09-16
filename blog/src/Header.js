@@ -1,18 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FaLaptop, FaTabletAlt, FaMobileAlt } from 'react-icons/fa'
-import { useContext, useState, useEffect } from 'react'
-import DataContext from './context/DataContext'
 import useWindowSize from './hooks/useWindowSize'
+import { useStoreState } from 'easy-peasy'
 
 const Header = ({ title }) => {
   const { width } = useWindowSize()
-  const [postsCount, setPostsCount] = useState(0)
-  const { posts } = useContext(DataContext)
-
-  useEffect(() => {
-    setPostsCount(posts.length)
-  }, [posts])
+  const postsCount = useStoreState((state) => state.postsCount)
 
   return (
     <header className="Header">

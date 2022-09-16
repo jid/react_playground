@@ -1,25 +1,17 @@
 import React from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
-// import PropTypes from 'prop-types'
-import { useContext } from 'react'
-import DataContext from './context/DataContext'
-import api from './api/posts'
+import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const PostPage = () => {
-  const { posts, setPosts } = useContext(DataContext)
   const { id } = useParams()
-  const post = posts.find(post => post.id.toString() === id)
+  const deletePost = useStoreActions((actions) => actions.deletePost)
+  const getPostById = useStoreState((state) => state.getPostById)
+  const post = getPostById(id)
   const navigate = useNavigate()
 
-  const handleDelete = async (id) => {
-    try {
-      await api.delete(`/posts/${id}`)
-      const newPosts = posts.filter(post => post.id.toString() !== id.toString())
-      setPosts(newPosts)
-      navigate('/')
-    } catch (err) {
-      console.log(`Error: ${err.message}`)
-    }
+  const handleDelete = (id) => {
+    deletePost(id)
+    navigate('/')
   }
 
   return (
@@ -50,10 +42,5 @@ const PostPage = () => {
     </main>
   )
 }
-
-// PostPage.propTypes = {
-//   posts: PropTypes.array,
-//   handleDelete: PropTypes.func
-// }
 
 export default PostPage

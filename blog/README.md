@@ -4,7 +4,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Functionality
 
-Application is a simple blog project.
+Application is a simple blog project. Utilizes `json-server` npm package working on `data/db.json` data file. json-server can be run with script (Windows):
+
+```
+run-json-server.ps1
+```
+
+, or with below command (Linux).
+
+```sh
+npx json-server -p 3500 -w ./data/db.json -S ./data/snapshots
+```
 
 ## Available Scripts
 

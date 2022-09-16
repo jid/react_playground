@@ -1,11 +1,9 @@
 import React from 'react'
 import Feed from './Feed'
-// import PropTypes from 'prop-types'
-import { useContext } from 'react'
-import DataContext from './context/DataContext'
+import { useStoreState } from 'easy-peasy'
 
-const Home = () => {
-  const { searchResults, fetchError, isLoading } = useContext(DataContext)
+const Home = ({ isLoading, fetchError }) => {
+  const searchResults = useStoreState((state) => state.searchResults)
 
   return (
     <main className="Home">
@@ -19,9 +17,5 @@ const Home = () => {
     </main>
   )
 }
-
-// Home.propTypes = {
-//   posts: PropTypes.array
-// }
 
 export default Home

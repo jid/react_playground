@@ -1,11 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import PropTypes from 'prop-types'
-import { useContext } from 'react'
-import DataContext from './context/DataContext'
+import { useEffect, useState } from 'react'
+import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const Nav = () => {
-  const { search, setSearch } = useContext(DataContext)
+  const posts = useStoreState((state) => state.posts)
+  const setSearchResults = useStoreActions((actions) => actions.setSearchResults)
+  const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    const postsFiltered = posts.filter(post => {
+      return (
+        post.title.toLowerCase().includes(search.toLowerCase())
+        || post.body.toLowerCase().includes(search.toLowerCase())
+      )
+    })
+    setSearchResults(postsFiltered.reverse())
+  }, [posts, search, setSearchResults])
+
   return (
     <nav className="Nav">
       <form
@@ -29,10 +41,5 @@ const Nav = () => {
     </nav>
   )
 }
-
-// Nav.propTypes = {
-//   search: PropTypes.string,
-//   setSearch: PropTypes.func
-// }
 
 export default Nav
