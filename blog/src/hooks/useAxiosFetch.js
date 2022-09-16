@@ -7,34 +7,26 @@ const useAxiosFetch = (dataUrl) => {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    let isMounted = true
-    const source = new AbortController()
+    const controller = new AbortController()
 
     const fetchData = async (url) => {
       setIsLoading(true)
       try {
-        const response = await axios.get(url, { signal: source.signal })
-        if (isMounted) {
-          setData(response.data)
-          setFetchError(null)
-        }
+        const response = await axios.get(url, { signal: controller.signal })
+        setData(response.data)
+        setFetchError(null)
       } catch (err) {
-        if (isMounted) {
-          setFetchError(err.message)
-          setData([])
-        }
+        setFetchError(err.message)
+        setData([])
       } finally {
-        // postpone isLoading call for 2s
-        // isMounted && setTimeout(() => setIsLoading(false), 2000)
-        isMounted && setIsLoading(false)
+        setIsLoading(false)
       }
     }
 
     fetchData(dataUrl)
 
     const cleanUp = () => {
-      isMounted = false
-      source.abort()
+      controller.abort()
     }
 
     return cleanUp
